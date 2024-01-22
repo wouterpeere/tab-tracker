@@ -14,7 +14,7 @@ app.use(cors())
 // register enpoint
 require('./routes')(app)
 
-sequelize.sync()
+sequelize.sync({force: true})
     .then(() => {
         app.listen(config.port)
         console.log(`Server stareted on port ${config.port}`)

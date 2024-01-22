@@ -14,11 +14,11 @@
             </v-btn>
         </v-toolbar-items> -->
         <v-spacer></v-spacer>
-        <v-toolbar-items>
-            <v-btn flat dark to="login">
+        <v-toolbar-items v-if="$store.state.isUserLoggedIn">
+            <v-btn v-if="$store.state.isUserLoggedIn" flat dark to="login">
                 Login
             </v-btn>
-            <v-btn flat dark to="register">  <!--This 'to' keyword works register page -->
+            <v-btn v-if="$store.state.isUserLoggedIn" flat dark to="register">  <!--This 'to' keyword works register page -->
                 Sign up
             </v-btn>
         </v-toolbar-items>

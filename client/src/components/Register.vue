@@ -5,28 +5,32 @@
         <v-toolbar flat dense dark class="cyan">
           <v-toolbar-title>Register a new user</v-toolbar-title>
         </v-toolbar>
-        <div class="pl-4 pr-2 pt-2 pb-2">
-          <v-text-field
-            v-model="email"
-            label="email"
-            clearable
-            outlined
-          ></v-text-field>
-          <v-text-field
-          v-model="password"
-          type="password"
-          label="password"
-
-          ></v-text-field>
-          <div class="error" v-html="error"/>
-          <br>
-          <v-btn
-            dark
-            class="cyan"
-            @click="register">
-            Register
-        </v-btn>
-        </div>
+          <form
+          name="tab-tracker-form"
+          autocomplete="off">
+          <div class="pl-4 pr-2 pt-2 pb-2">
+            <v-text-field
+              v-model="email"
+              label="email"
+              clearable
+              outlined
+            ></v-text-field>
+            <v-text-field
+            v-model="password"
+            type="password"
+            label="password"
+            autocomplete="new-password"
+            ></v-text-field>
+            <div class="error" v-html="error"/>
+            <br>
+            <v-btn
+              dark
+              class="cyan"
+              @click="register">
+              Register
+            </v-btn>
+          </div>
+        </form>
       </div>
     </v-flex>
   </v-layout>

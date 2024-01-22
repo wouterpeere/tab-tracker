@@ -11,8 +11,7 @@ module.exports = {
         })
         
         const {error} = schema.validate(req.body)
-        console.log(req.body)
-
+        
         if (error) {
             switch (error.details[0].context.key){ // get the key that failed validation
                 case 'email':

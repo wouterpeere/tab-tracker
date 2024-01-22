@@ -12,6 +12,8 @@ function jwtSignUser (user) {
 module.exports = {
     async register (req, res) {
         try {
+            console.log("Register", User)
+
         const user = await User.create(req.body)
         res.send(user.toJSON())
         } catch (err) {
@@ -24,7 +26,6 @@ module.exports = {
     async login (req, res) {
         try {
         const {email, password} = req.body
-        console.log(req.body)
         const user = await User.findOne({
             where: {
                 email: email
@@ -38,8 +39,6 @@ module.exports = {
         }
 
         const isPasswordValid = password === user.password
-        console.log(user.password, password, isPasswordValid, user.password === password)
-
         if (!isPasswordValid) {
             res.status(403).send({
                 error: 'The login information was incorrect.'

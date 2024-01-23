@@ -13,6 +13,24 @@ module.exports = {
             })
         }
     },
+    async show (req, res) {
+        try {
+            console.log('right path', req.params)
+            const song = await Song.findByPk(req.params.songId)
+            if (!song){
+                // there is no song returned
+                res.status(403).send({
+                    error: `There is no song with id ${req.params.songId}`
+                })
+                return;
+            }
+            res.send(song)
+        } catch (err) {
+            res.status(500).send({
+                error: 'An error has occured trying to fetch the songs.'
+            })
+        }
+    },
     async post (req, res) {
         try {
             console.log(req.body)

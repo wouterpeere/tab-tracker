@@ -51,7 +51,7 @@
                 ></v-text-field>
                 <v-text-field
                     multi-line
-                    v-model="song.tabs"
+                    v-model="song.tab"
                     label="Tabs"
                     required
                     :rules="[required]"
@@ -98,6 +98,7 @@ export default {
             const areAllFieldsFilledIn = Object
                 .keys(this.song)
                 .every(key => !!this.song[key])
+            console.log(this.song)
             if (!areAllFieldsFilledIn) {
                 this.error = 'Please fill in all the required fields.'
                 return

@@ -14,25 +14,25 @@ module.exports = {
         
         if (error) {
             switch (error.details[0].context.key){ // get the key that failed validation
-                case 'email':
-                    res.status(400).send({
-                        error: 'You must provide a valid email address.'
-                    })
-                    break
-                case 'password':
-                    res.status(400).send({
-                        error: `The password provided failed to match the following rules:
+            case 'email':
+                res.status(400).send({
+                    error: 'You must provide a valid email address.'
+                })
+                break
+            case 'password':
+                res.status(400).send({
+                    error: `The password provided failed to match the following rules:
                         <br>
                         1. It must only contain the following chars: lower case, upper case letters or numbers.
                         <br>
                         2. It be at least 8 chars in length and not greater than 32 chars
                         `
-                    })
-                    break
-                default:
-                    res.status(400).send({
-                        error: 'Invalid registration information.'
-                    })
+                })
+                break
+            default:
+                res.status(400).send({
+                    error: 'Invalid registration information.'
+                })
             }
         } else {
             next()

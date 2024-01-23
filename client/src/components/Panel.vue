@@ -4,11 +4,8 @@
             <v-toolbar-title>{{ title }}</v-toolbar-title>
         </v-toolbar>
         <div class="pl-4 pr-2 pt-2 pb-2">
-            <slot name="first">
-                No slot content defined.
-            </slot>
-            <slot name="second">
-                No slot content defined.
+            <slot>
+                No slot definied.
             </slot>
         </div>
     </div>
@@ -16,12 +13,11 @@
 
 <script>
 export default {
-    data () {
-        return {
-            title: 'hello world'
-        };
-    }
-};
+    props: [
+        'title'
+    ]
+}
+
 </script>
 
 <style scoped></style>

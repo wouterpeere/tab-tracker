@@ -17,7 +17,7 @@ module.exports = {
   ],
   // required to lint *.vue files
   plugins: [
-    'vue'
+    'vue',
   ],
   // add your custom rules here
   rules: {
@@ -27,7 +27,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'quotes': ['error', 'single'],
     // we want to force semicolons
-    'semi': ['error', 'always'],
+    'semi': ['off', 'never'],
     // we use 4 spaces to indent our code
     'indent': ['error', 4],
     // we want to avoid extraneous spaces

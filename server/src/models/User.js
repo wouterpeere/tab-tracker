@@ -3,7 +3,7 @@ const bcrypt = Promise.promisifyAll(require('bcrypt-nodejs'))
 
 function hashPassword (user, options) {
     const SALT_FACTOR = 8
-    console.log(options, "options")
+    console.log(options, 'options')
     if (!user.changed('password')) {
         return
     }
@@ -12,29 +12,29 @@ function hashPassword (user, options) {
         .genSaltAsync(SALT_FACTOR)
         .then(salt => bcrypt.hashAsync(user.password, salt, null))
         .then(hash => {
-        user.setDataValue('password', hash)
+            user.setDataValue('password', hash)
         })
 }
 
 module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
-    email: {
-      type: DataTypes.STRING,
-      unique: true
-    },
-    password: DataTypes.STRING
-  }, {
-    hooks: {
-      beforeCreate: hashPassword,
-      beforeUpdate: hashPassword
-    //   beforeSave: hashPassword  // in order to get 
-    }
-  })
+    const User = sequelize.define('User', {
+        email: {
+            type: DataTypes.STRING,
+            unique: true
+        },
+        password: DataTypes.STRING
+    }, {
+        hooks: {
+            beforeCreate: hashPassword,
+            beforeUpdate: hashPassword
+            //   beforeSave: hashPassword  // in order to get 
+        }
+    })
 
-  User.prototype.comparePassword = function (password) {
-    console.log('Check password', password, this.password, bcrypt.compareAsync(password, this.password))
-    return bcrypt.compareAsync(password, this.password)
-  }
+    User.prototype.comparePassword = function (password) {
+        console.log('Check password', password, this.password, bcrypt.compareAsync(password, this.password))
+        return bcrypt.compareAsync(password, this.password)
+    }
 
     return User
 }

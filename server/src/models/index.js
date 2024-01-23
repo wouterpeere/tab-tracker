@@ -1,6 +1,6 @@
 // login to db
 
-const fs = require('fs')  // voor file system
+const fs = require('fs') // voor file system
 const path = require('path')
 const Sequelize = require('sequelize')
 const config = require('../config/config')
@@ -16,13 +16,13 @@ const sequelize = new Sequelize(
 // read through models and set up sequelize 
 
 fs
-    .readdirSync(__dirname)  // read through current dir and give back files
+    .readdirSync(__dirname) // read through current dir and give back files
     .filter((file) => 
         file !== 'index.js'
     )
     .forEach((file) => {
-        const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes)
-        db['User'] = model
+        const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes);
+        db[model.name] = model
     })
 
 db.sequelize = sequelize

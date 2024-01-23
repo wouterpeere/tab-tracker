@@ -37,30 +37,30 @@
 </template>
 
 <script>
-import AuthenticationService from '@/services/AuthenticationService'
+import AuthenticationService from '@/services/AuthenticationService';
 
 export default {
-  data () {
-    return {
-      email: '',
-      password: '',
-      error: null
+    data () {
+        return {
+            email: '',
+            password: '',
+            error: null
+        };
+    },
+    methods: {
+        async register () {
+            try {
+                await AuthenticationService.register({
+                    email: this.email,
+                    password: this.password
+                });
+            } catch (error) {
+                // console.log(error.response.data.error)
+                this.error = error.response.data.error;
+            }
+        }
     }
-  },
-  methods: {
-    async register () {
-      try {
-        await AuthenticationService.register({
-          email: this.email,
-          password: this.password
-        })
-      } catch (error) {
-        // console.log(error.response.data.error)
-        this.error = error.response.data.error
-      }
-    }
-  }
-}
+};
 
 </script>
 

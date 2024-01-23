@@ -13,14 +13,14 @@
 </template>
 
 <script>
-import PageHeader from '@/components/Header.vue'
+import PageHeader from '@/components/Header.vue';
 
 export default {
-  name: 'App',
-  components: {
-    PageHeader
-  }
-}
+    name: 'App',
+    components: {
+        PageHeader
+    }
+};
 </script>
 
 <style>

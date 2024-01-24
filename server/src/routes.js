@@ -21,6 +21,10 @@ module.exports = (app) => {
     app.post('/songs',
         SongsController.post)
 
-    app.post('/bookmarks',
+    app.get('/bookmarks',
         BookmarksController.index)
+    app.post('/bookmarks',
+        BookmarksController.post)
+    app.delete('/bookmarks/:bookmarkId',
+        BookmarksController.delete)
 }

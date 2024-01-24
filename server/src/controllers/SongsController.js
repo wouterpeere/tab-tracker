@@ -35,7 +35,6 @@ module.exports = {
     },
     async show (req, res) {
         try {
-            console.log('right path', req.params)
             const song = await Song.findByPk(req.params.songId)
             if (!song){
                 // there is no song returned

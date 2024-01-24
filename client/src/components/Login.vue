@@ -13,6 +13,7 @@
           label="password"
           type="password"
           clearable
+          @keyup.enter="login"
           ></v-text-field>
           <div class="danger-alert" v-html="error"/>
           <br>
@@ -46,7 +47,7 @@ export default {
                     password: this.password
                 })
                 this.$store.dispatch('setToken', response.data.token)
-                this.$store.dispatch('setUser', response.data.token)
+                this.$store.dispatch('setUser', response.data.user)
                 this.$router.push({
                     name: 'songs'
                 })

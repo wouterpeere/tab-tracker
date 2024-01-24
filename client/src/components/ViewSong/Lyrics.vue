@@ -1,22 +1,17 @@
 <template>
-    <Panel title="Lyrics">
+    <panel title="Lyrics">
     <textarea
         readonly
         v-model="song.lyrics"
     ></textarea>
-    </Panel>
+    </panel>
 </template>
 
 <script>
-import Panel from '@/components/Panel'
-
 export default {
     props: [
         'song'
-    ],
-    components: {
-        Panel
-    }
+    ]
 }
 </script>
 

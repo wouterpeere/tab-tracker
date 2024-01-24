@@ -1,21 +1,16 @@
 <template>
-    <Panel title="YouTube Video">
+    <panel title="YouTube Video">
         <youtube :video-id="youtubeId">
 
         </youtube>
-    </Panel>
+    </panel>
 </template>
 
 <script>
-import Panel from '@/components/Panel'
-
 export default {
     props: [
         'youtubeId'
-    ],
-    components: {
-        Panel
-    }
+    ]
 }
 </script>
 

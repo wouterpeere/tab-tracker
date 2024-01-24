@@ -17,7 +17,7 @@
             label="password"
             autocomplete="new-password"
             ></v-text-field>
-            <div class="error" v-html="error"/>
+            <div class="danger-alert" v-html="error"/>
             <br>
             <v-btn
               dark
@@ -33,7 +33,6 @@
 
 <script>
 import AuthenticationService from '@/services/AuthenticationService'
-import Panel from '@/components/Panel'
 
 export default {
     data () {
@@ -46,26 +45,24 @@ export default {
     methods: {
         async register () {
             try {
-                await AuthenticationService.register({
+                const response = await AuthenticationService.register({
                     email: this.email,
                     password: this.password
+                })
+                this.$store.dispatch('setToken', response.data.token)
+                this.$store.dispatch('setUser', response.data.user)
+                this.$router.push({
+                    name: 'songs'
                 })
             } catch (error) {
                 // console.log(error.response.data.error)
                 this.error = error.response.data.error
             }
         }
-    },
-    components: {
-        Panel
     }
 }
 
 </script>
 
 <style scoped>
-.error{
-  color: red;
-}
-
 </style>

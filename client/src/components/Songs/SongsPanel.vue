@@ -1,5 +1,23 @@
 <template>
-    <panel title="Song Metadata">
+    <panel title="Songs"> <!--This is the panel component. title isdefined in script of panel.-->
+        <v-btn
+        slot="action"
+        fab
+        class="cyan accent-2"
+        light
+        medium
+        absolute
+        right
+        middle
+        :to="{
+            name: 'songs-create'
+        }"
+        >
+            <v-icon>add</v-icon>
+        </v-btn>
+        <div v-for="song in songs"
+        :key="song.id"
+        class="song"> <!--Dit genereert deze div voor elke song in songs (zie scripts)-->
         <v-layout>
             <v-flex xs6> <!--Columns 12 breed-->
                 <div class="song-title">
@@ -16,35 +34,43 @@
                 dark
                 class="cyan"
                 :to="{
-                    name: 'song-edit',
-                    params () {
-                        return {
+                    name: 'song',
+                    params:{
                         songId: song.id
-                        }
-                    }
+                }
                 }">
-                Edit
+                View
                 </v-btn>
-
             </v-flex>
             <v-flex xs6>
                 <img class="album-image" :src="song.albumImageUrl">
-                <br>
-                {{ song.album }}
             </v-flex>
         </v-layout>
+        </div>
     </panel>
 </template>
 
 <script>
+import SongService from '@/services/SongsService'
 export default {
-    props: [
-        'song'
-    ]
+    data () {
+        return {
+            songs: null
+        }
+    },
+    watch: {
+        '$route.query.search': {
+            immediate: true,
+            async handler (value) {
+                this.songs = (await SongService.index(value)).data
+            }
+        }
+    }
 }
 </script>
 
 <style scoped>
+
 .song{
     padding: 20px;
     height: 330px;
@@ -64,8 +90,7 @@ export default {
 }
 
 .album-image{
-    width: 100%;
+    width: 70%;
     margin: 0 auto;
 }
-
 </style>

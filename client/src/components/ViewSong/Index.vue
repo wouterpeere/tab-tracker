@@ -24,11 +24,10 @@
 
 <script>
 import SongsService from '@/services/SongsService'
-import Panel from '@/components/Panel'
 import SongMetaData from './SongMetadata'
 import Youtube from './Youtube'
 import Lyrics from './Lyrics'
-import Tabsd from './Tab'
+import Tabs from './Tab'
 
 export default {
     data () {
@@ -42,11 +41,10 @@ export default {
         console.log(this.song)
     },
     components: {
-        Panel,
         'song-metadata': SongMetaData,
         'youtube': Youtube,
         'lyrics': Lyrics,
-        'tab': Tabsd
+        'tab': Tabs
     }
 }
 

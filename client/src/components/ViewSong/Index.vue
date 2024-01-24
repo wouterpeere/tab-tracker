@@ -38,7 +38,6 @@ export default {
     async mounted () {
         const songId = this.$store.state.route.params.songId // route is synced to store (see main.js)
         this.song = (await SongsService.show(songId)).data
-        console.log(this.song)
     },
     components: {
         'song-metadata': SongMetaData,

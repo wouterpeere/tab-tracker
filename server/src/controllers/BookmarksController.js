@@ -1,21 +1,39 @@
-const {Bookmark} = require('../models')
+const _ = require('lodash')
+const {Bookmark,
+    Song} = require('../models')
+
+Object.filter = (obj, predicate) => 
+    Object.fromEntries(Object.entries(obj).filter(predicate));
 
 module.exports = {
+    
     async index (req, res) {
         try {
             const {songId, userId} = req.query
-            
-            const bookmark = await Bookmark.findOne({
-                where:{
-                    SongId : songId,
-                    UserId: userId
-                }
-            })
-            res.send(bookmark) // if it does not exist, null is returned
+            const filteredWhere = Object.filter({
+                SongId : songId,
+                UserId: userId
+            // eslint-disable-next-line no-unused-vars
+            }, ([idx, val]) => val!==undefined)
+
+            const bookmarks = (await Bookmark.findAll({
+                where:filteredWhere,
+                include: [
+                    {
+                        model: Song
+                    }
+                ]
+            }))
+                .map(bookmark => bookmark.toJSON())
+                .map(bookmark => _.assignIn(
+                    {}, bookmark.Song,
+                    bookmark))
+            res.send(bookmarks)
 
         } catch (err) {
             res.status(500).send({
-                error: 'An error has occured trying to fetch the songs.'
+                error: 'An error has occured trying to fetch the songs.',
+                msg:err
             })
         }
     },

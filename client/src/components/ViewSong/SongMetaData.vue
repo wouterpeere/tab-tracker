@@ -65,7 +65,8 @@ export default {
     },
     computed: { // so $store.state.userLoggedIn is not needed everywhere
         ...mapState([
-            'isUserLoggedIn'
+            'isUserLoggedIn',
+            'user'
         ])
     },
     watch: {
@@ -74,11 +75,15 @@ export default {
                 if (!this.isUserLoggedIn) {
                     return
                 }
-                console.log(this.song.id, this.$store.state.user.id)
-                this.bookmark = (await BookmarksService.index({
+
+                const bookmarks = (await BookmarksService.index({
                     songId: this.song.id,
-                    userId: this.$store.state.user.id
+                    userId: this.user.id
                 })).data
+
+                if (bookmarks.length) {
+                    this.bookmark = bookmarks[0]
+                }
                 console.log('bookmark', this.bookmark)
             } catch (err) {
                 console.log(err)
@@ -91,7 +96,7 @@ export default {
             try {
                 this.bookmark = (await BookmarksService.post({
                     songId: this.song.id,
-                    userId: this.$store.state.user.id
+                    userId: this.user.id
                 })).data
             } catch (err) {
                 console.log(err)

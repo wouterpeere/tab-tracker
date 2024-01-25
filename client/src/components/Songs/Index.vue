@@ -1,6 +1,10 @@
 <template>
-    <v-layout column>
-        <v-flex xs6 offset-xs3>
+    <v-layout>
+        <v-flex xs6>
+            <songs-bookmarks />
+            <recently-viewed-songs class="mt-2" />
+        </v-flex>
+        <v-flex xs6 class="ml-2">
             <song-search-panel class="mb-2"/>
             <songs-panel />
         </v-flex>
@@ -11,11 +15,15 @@
 import SongService from '@/services/SongsService'
 import SongsPanel from './SongsPanel'
 import SongsSearchPanel from './SongsSearchPanel'
+import SongsBookmarks from './SongsBookmarks'
+import RecentlyViewedSongs from './RecentlyViewedSongs'
 
 export default {
     components: {
         'songs-panel': SongsPanel,
-        'song-search-panel': SongsSearchPanel
+        'song-search-panel': SongsSearchPanel,
+        'songs-bookmarks': SongsBookmarks,
+        'recently-viewed-songs': RecentlyViewedSongs
     },
     data () {
         return {

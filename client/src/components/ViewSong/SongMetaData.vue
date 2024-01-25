@@ -77,8 +77,7 @@ export default {
                 }
 
                 const bookmarks = (await BookmarksService.index({
-                    songId: this.song.id,
-                    userId: this.user.id
+                    songId: this.song.id
                 })).data
 
                 if (bookmarks.length) {

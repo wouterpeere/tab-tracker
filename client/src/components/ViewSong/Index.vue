@@ -50,9 +50,7 @@ export default {
 
         if (this.isUserLoggedIn) {
             SongHistoryService.post({ // push to history db
-                songId: songId,
-                userId: this.user.id
-            })
+                songId: songId})
         }
     },
     components: {
